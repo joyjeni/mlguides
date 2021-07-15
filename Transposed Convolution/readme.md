@@ -5,7 +5,7 @@ Eg:
 
 ###  GAN
 
-#### Semantic Segmentation
+### Semantic Segmentation
 
 
 ### Convolutional Auto Encoder
