@@ -4,7 +4,7 @@
 * YOLO divides the input image into an SXS grid. Each grid cell predicts only one object.
 * Lets look at this on a small scale. Divide this image into 3x3 cells (9 Grid Cells) and assign the center of the object to that grid cell. This grid cell is responsible to predict the object.
 
-![Decide Grid](https://github.com/joyjeni/mlguides/tree/master/Yolov3/images/1.png?raw=true)
+![Decide Grid](https://github.com/joyjeni/mlguides/blob/master/Yolov3/images/1.png)
 
 
 
