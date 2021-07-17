@@ -12,6 +12,7 @@ Each grid cell has 8 objects. In Yolo we predict a feature map of 3 dimensions. 
 
 
 ![each Grid](https://github.com/joyjeni/mlguides/blob/master/Yolov3/images/2.png)
+           
 For those grid cells with no object detected, it's pc=0 and we don't care about the rest of the other values. Thats what "?" means in the graph.
 
 ### Bounding boxes
