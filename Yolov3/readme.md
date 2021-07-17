@@ -154,13 +154,78 @@ if we postulate that the red box is responsible for predicating the dog, the cen
 
 * However, that design choice has been dropped in V3, and authors used sigmoid instead. The reason is that softmax class scores assume that the classes are mutually exclusive. In simple words, if an object belongs to one class, then its guaranteed it cannot belong to another class.
 * Each class score is predicted using logistic regression and a threshold is used to predict multiple labels for an object. Classes with scores higher than threshold are assigned to the box.
-* 
+
+#### Test your understanding
+
+1. What are the total numbers of bounding boxes that YOLO predicts?
+
+(13x13x3)+(26x26x3) + (52x52x3) = 10,647
+
+2. Why are we predicting for 3 different scales?
+This helps YOLO V3 get better at detecting small objects.
+
+### Thresholding by Object Confidence
+
+First, we filter boxes based on their objectness score. Generally, boxes having scores below a threshold are ignored.
+
+### Choice of anchor boxes
+
+* YOLO V3, in total uses 9 anchor boxes. Three for each scale. It also uses K-Means clustering to generate 9 anchors.
+* The anchors are then arranged in descending order of a dimension. The three biggest anchors are assigned for the first scae, the next three for the second scale, and the last three for the third.
+* At each scale, every grid can predict 3 boxes using 3 anchors. There are 3 scales.
+
+### Yolo V2 loss function
+
+![yolo_loss](https://github.com/joyjeni/mlguides/blob/master/Yolov3/images/21.png)
+
+More detail
+![yolo_loss](https://github.com/joyjeni/mlguides/blob/master/Yolov3/images/22.png)
+
+* To compute the loss for the true positive, we only want one of them to be responsible for the object. For this purpose, we select the one with the highest IoU with the ground truth.
+
+The YOLO loss function is composed of:
+
+* The classification loss
+* The ocalization loss (errors between the predicted boundary box and the ground truth)
+* The confidence loss (The objectness of the box)
+
+### Classification Loss
+
+If an object is detected, the classification loss at each cell is the squared error of the class conditional probabilities for each class.
+![yolo_loss](https://github.com/joyjeni/mlguides/blob/master/Yolov3/images/23.png)
+
+### Localization Loss
+
+The localization loss measures the errors in the predicted boundary box locations and sizes. We only count the box responsible for detecting the object.
+
+![yolo_loss](https://github.com/joyjeni/mlguides/blob/master/Yolov3/images/24.png)
+
+### Confidence Loss
+
+![yolo_loss](https://github.com/joyjeni/mlguides/blob/master/Yolov3/images/25.png)
+
+Together we get
+
+![yolo_loss](https://github.com/joyjeni/mlguides/blob/master/Yolov3/images/26.png)
+
+It is opposite of localization loss. 
+NB: How class imbalance is solved. by multiplying whole term by 0.5
+
 
 ###Note
 
 1. In Yolo V2 there is no anchor box.
 2. In Yolo 1,2 one prediction
+3. In Yolo V3, squared errors replaced by binary cross-entrophy error terms.Object confidence and class predictions in YOLO v3 are now predicted through logistic regression.
 
+4. While we are training the detector, for each ground truth box, we assign a bounding box, whose anchor has the maximum overlap with the ground truth box.
+
+
+![yolo_loss](https://github.com/joyjeni/mlguides/blob/master/Yolov3/images/26.png)
+
+### YOLO V3 Results
+
+![yolo_loss](https://github.com/joyjeni/mlguides/blob/master/Yolov3/images/27.png)
 
 #### Reference
 
