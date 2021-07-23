@@ -171,6 +171,17 @@ Input image is 416x416, and stride of the network is 32. The dimensions of the f
 
 ![yolo output](https://github.com/joyjeni/mlguides/blob/master/Yolov3/images/19.png)
 
+
+#### Kmeans Clustering  
+
+(i). To predict Bounding Box
+
+1. Calculate offset to anchor also called as Log space transform
+2. 
+
+
+Offset is also called log space transform.
+
 ### Why passing through Sigmoid
 
 For example, consider the case of our dog image. If the prediction for center is (0.4,0.7), then this means that the center liesat
