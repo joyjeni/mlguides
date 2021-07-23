@@ -113,14 +113,50 @@ YOLO
 ### Yolo V3 Architecture.
 ![yolo output](https://github.com/joyjeni/mlguides/blob/master/Yolov3/images/14.png)
 
+Darknet 53 consists of 53 layers. and another 53 layers for detection. Totally 106 layers present.
+![yolo arch](https://github.com/joyjeni/mlguides/blob/master/Yolov3/images/y_1_architecture.png)
+
+### Stride
+
+![yolo arch](https://github.com/joyjeni/mlguides/blob/master/Yolov3/images/y_2_stride.png)
+
+### Networks Input
+
+![network_input](https://github.com/joyjeni/mlguides/blob/master/Yolov3/images/y_3_network_input.png)
+
+### Detection at 3 scales
+
+82, 94,106
+
+![detection](https://github.com/joyjeni/mlguides/blob/master/Yolov3/images/y_4_detections.png)
 * Prediction at 3 scales help to predict small objects
+
+
+![strides](https://github.com/joyjeni/mlguides/blob/master/Yolov3/images/y_5_strides.png)
+
+### Feature maps
+
+Yplo V3 has 3 feature maps.
+(13x13), (26x26), (52x52)
+
+Each feature map predicts 3 feature maps. They have same spatial dimensions. The shape of detection kernel also has its depth
+
+### Number of bounding box attributes
+
+\begin{equation}
+b+(5*C) 
+\end{equation}
+b - Number of bounding box
+C- Nimber of classes
+
+
 
 Example:
 
 Input image is 416x416, and stride of the network is 32. The dimensions of the feature map will be 13x13. We then divide the input image into 13x13 cells.
 ![yolo output](https://github.com/joyjeni/mlguides/blob/master/Yolov3/images/15.png)
 
-### Prediction of the Anchor Boxes
+### Prediction of the Anchor Boxes or Priors
 * It might make sense to predict the width and height of the bounding box, but in practice, that leads to unstable gradients during training. Instead, most of the modern object detectors offsets(*** which is how much we should we move the predicted bounding box in order to get the desired bounding box) to pre-defined default bounding boxes(anchors)
 * Then, these transforms are applied to the anchor boxes to obtain the prediction. YOLO v3 has three anchors, which result in prediction of three bounding boxes per cell.
 
